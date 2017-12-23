@@ -1,0 +1,6 @@
+{
+  "name": "$safeappid$",
+  "app_id": "11223344556677889900",
+  "integrations": {},
+  "type": "ionic-angular"
+}

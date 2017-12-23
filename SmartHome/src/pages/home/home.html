@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      SmartHome
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="home" padding>
+
+    <h2 class="center">Ionic 3</h2> 
+
+    <div class="center">
+        <p class="ionic-logo"></p>
+    </div>
+
+    <ion-card>
+        <ion-card-header>
+            Docs are here to help you
+        </ion-card-header>
+
+        <ion-list>
+
+            <ion-list>
+                <button ion-item *ngFor="let floor of house?.floors.reverse()" (click)="floorSelected(floor)">
+                    {{ floor.number }}
+                </button>
+            </ion-list>
+            
+            <!--<ul *ngIf="house">
+                <li *ngFor="let floor of house.floors.reverse() ">
+                    Floor number: {{floor.number}}
+                </li>
+            </ul>-->
+
+            <!--<button ion-item (click)="onLink('http://go.microsoft.com/fwlink/?LinkID=820516')">
+                <ion-icon name="jet" item-left></ion-icon>
+                Getting Started
+            </button>-->
+
+            <!--<button ion-item (click)="goTo('login')">
+                <ion-icon name="jet" item-left></ion-icon>
+                Login
+            </button>-->
+
+        </ion-list>
+        
+    </ion-card>
+
+</ion-content>
