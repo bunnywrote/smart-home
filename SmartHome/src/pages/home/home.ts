@@ -11,6 +11,12 @@ import { Floor } from '../../models/floor.class';
 import { Unit } from '../../models/unit.class';
 import { Room } from '../../models/room.class';
 
+import {
+	IMqttMessage,
+	MqttModule,
+	MqttService,
+	IMqttServiceOptions
+} from 'ngx-mqtt';
 
 @IonicPage()
 @Component({
@@ -20,16 +26,56 @@ import { Room } from '../../models/room.class';
 export class HomePage {
 
     private navCtrl: NavController;
-    private house: House;
+	private house: House;
+
+	private subscription: any;
+	public message: string;
+
+	private topic1: string = "siot/DAT/0F3A-D8FE-7BC9-0B64-3296-A28C-E88D-199F/507fd9cd-102e-fed6-af60-25ef4741822e";
+	private topic2: string = "siot/DAT/0F3A-D8FE-7BC9-0B64-3296-A28C-E88D-199F/b972d0d2-13b0-86b0-5fb0-393b251d80fa";
+	private topic3: string = "lol";
 
     constructor(
         navCtrl: NavController,
         navParams: NavParams,
-        private houseService: HouseService
+		private houseService: HouseService,
+		private _mqttService: MqttService
     ) {
         this.navCtrl = navCtrl;
-        this.getHouse();
+		this.getHouse();
+
+
+
+	    this._mqttService.observe(this.topic1).subscribe((message) => {
+	    	console.log(message);
+	    });
+
+		this._mqttService.observe(this.topic2).subscribe((message) => {
+	    	console.log(message);
+	    });
+
+		//this._mqttService.observe(this.lol).subscribe((message) => {
+		//	this.message = message.payload.toString();
+
+		//	console.log(message);
+		//	console.log(JSON.stringify(message));
+
+	 //   });
     }
+
+	public publish(): void {
+		this.unsafePublish(this.topic2, "hello SIOT");
+	}
+
+	public publishEclipse(): void {
+		this.unsafePublish(this.topic3, "hello Eclipse");
+	}
+
+	public unsafePublish(topic: string, message: string): void {
+		console.log(topic);
+		console.log(message);
+		this._mqttService.unsafePublish(topic, message);
+	}
 
     public goTo(component: string): void {
         this.navCtrl.push(LoginPage);

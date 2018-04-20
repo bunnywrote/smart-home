@@ -1,29 +1,48 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      SmartHome
-    </ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        
+        <ion-title>
+            SmartHome
+        </ion-title>
+
+        <ion-buttons end>
+            <button ion-button icon-only (click)="openModal()">
+                <ion-icon name="options"></ion-icon>
+            </button>
+        </ion-buttons>
+
+    </ion-navbar>
 </ion-header>
 
 <ion-content class="home" padding>
 
-    <h2 class="center">Ionic 3</h2> 
+    <!--<h2 class="center">Ionic 3</h2> 
 
     <div class="center">
         <p class="ionic-logo"></p>
-    </div>
+    </div>-->
 
     <ion-card>
-        <ion-card-header>
-            Docs are here to help you
-        </ion-card-header>
+	    <ion-card-header>
+		    <h1>
+			    {{message}}
+		    </h1>
+			
+		    <h2>
+			    <button (click)="publish()">Hello SIOT</button>
+		    </h2>
+		    
+			<h2>
+			    <button (click)="publishEclipse()">Hello Eclipse</button>
+		    </h2>
+		    Floorsssssss:
+	    </ion-card-header>
 
         <ion-list>
 
             <ion-list>
                 <button ion-item *ngFor="let floor of house?.floors.reverse()" (click)="floorSelected(floor)">
-                    {{ floor.number }}
+                    Floor: {{ floor.number }}
                 </button>
             </ion-list>
             

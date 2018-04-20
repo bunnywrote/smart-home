@@ -4,9 +4,34 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { Observable } from 'rxjs/Observable';
+
+import {
+	IMqttMessage,
+	MqttModule,
+	MqttService,
+	IMqttServiceOptions
+} from 'ngx-mqtt';
+
 import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
 import { FloorPage } from '../pages/floor/floor';
+
+export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
+	hostname: 'siot.net',
+	protocol: 'ws',
+	//port: 14861,
+	port: 9001,
+	path: ''
+	
+	//hostname: 'iot.eclipse.org',
+	//port: 80,
+	//path: '/ws'
+};
+
+export function mqttServiceFactory() {
+	return new MqttService(MQTT_SERVICE_OPTIONS);
+}
 
 @NgModule({
     declarations: [
@@ -14,7 +39,11 @@ import { FloorPage } from '../pages/floor/floor';
         LoginPage,
         FloorPage
     ],
-    imports: [
+	imports: [
+		MqttModule.forRoot({
+			provide: MqttService,
+			useFactory: mqttServiceFactory
+		}),
         BrowserModule,
         IonicModule.forRoot(MyApp)],
     bootstrap: [
