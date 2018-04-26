@@ -4,6 +4,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { SiotMqttService } from '../services/siot-mqtt.service';
+
 import { Observable } from 'rxjs/Observable';
 
 import {
@@ -20,7 +22,6 @@ import { FloorPage } from '../pages/floor/floor';
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
 	hostname: 'siot.net',
 	protocol: 'ws',
-	//port: 14861,
 	port: 9001,
 	path: ''
 	
@@ -54,7 +55,8 @@ export function mqttServiceFactory() {
         LoginPage,
         FloorPage
     ],
-    providers: [
+	providers: [
+		SiotMqttService,
         StatusBar,
         SplashScreen,
         {

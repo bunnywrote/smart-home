@@ -5,6 +5,7 @@ import { LoginPage } from '../login/login';
 import { FloorPage } from '../floor/floor';
 
 import {HouseService} from '../../services/house.service';
+import {SiotMqttService} from '../../services/siot-mqtt.service';
 
 import { House } from '../../models/house.class';
 import { Floor } from '../../models/floor.class';
@@ -39,42 +40,23 @@ export class HomePage {
         navCtrl: NavController,
         navParams: NavParams,
 		private houseService: HouseService,
-		private _mqttService: MqttService
+		private mqttService: SiotMqttService
     ) {
         this.navCtrl = navCtrl;
 		this.getHouse();
 
+		this.mqttService.subscribeTo(this.topic1).subscribe((message) => {
+			this.message = message.payload.toString();
 
+			console.log(message);
+			console.log(JSON.stringify(message));
 
-	    this._mqttService.observe(this.topic1).subscribe((message) => {
-	    	console.log(message);
 	    });
-
-		this._mqttService.observe(this.topic2).subscribe((message) => {
-	    	console.log(message);
-	    });
-
-		//this._mqttService.observe(this.lol).subscribe((message) => {
-		//	this.message = message.payload.toString();
-
-		//	console.log(message);
-		//	console.log(JSON.stringify(message));
-
-	 //   });
     }
 
-	public publish(): void {
-		this.unsafePublish(this.topic2, "hello SIOT");
-	}
-
-	public publishEclipse(): void {
-		this.unsafePublish(this.topic3, "hello Eclipse");
-	}
-
-	public unsafePublish(topic: string, message: string): void {
-		console.log(topic);
-		console.log(message);
-		this._mqttService.unsafePublish(topic, message);
+	public publish(message: string): void {
+		this.mqttService.publish(this.topic1, message);
+		//this.unsafePublish(this.topic2, "hello SIOT");
 	}
 
     public goTo(component: string): void {
