@@ -1,11 +1,14 @@
-﻿import { InMemoryDbService } from 'angular-in-memory-web-api';
+﻿ import { InMemoryDbService } from 'angular-in-memory-web-api';
 
 export class InMemoryDataService implements InMemoryDbService {
     createDb() {
 
-        let house = {
-            actors: [
-                { id: 3, name: "door", value: "0", minValue: "0", maxValue: "1" }
+	    let house = {
+		    deviceGroups: [
+				{
+					name: "",
+					devices: [{guid: 3, type: "actor", subtype: "switchOnOff", name: "Light", value: "false"}]
+				},
             ],
             floors: [
                 {

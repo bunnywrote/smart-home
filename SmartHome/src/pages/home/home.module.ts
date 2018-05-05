@@ -7,10 +7,15 @@ import { HouseService } from '../../services/house.service';
 import { InMemoryDataService } from '../../services/in-memory-data.service';
 
 import { HomePage } from './home';
+import { DeviceGroupComponent } from '../../components/device-group/device-group.component';
+import { OnOffSwitcherComponent } from '../../components/on-off-switcher/on-off-switcher.component';
 
 @NgModule({
     declarations: [
-        HomePage
+		HomePage,
+		DeviceGroupComponent,
+		OnOffSwitcherComponent
+
     ],
     imports: [
         HttpClientModule,

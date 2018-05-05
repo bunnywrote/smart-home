@@ -1,0 +1,12 @@
+﻿<ion-list>
+
+	<div ion-item *ngFor="let device of group.devices">
+			
+		<div *ngIf="device.subtype === 'switchOnOff'">
+			switcher
+			<on-off-switcher [label]="device.name" [checked]="device.value" (switch)="testPublish($event)"></on-off-switcher>
+		</div>
+
+	</div>
+
+</ion-list>	

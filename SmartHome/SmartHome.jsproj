@@ -122,7 +122,4 @@
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="src\components\" />
-  </ItemGroup>
 </Project>

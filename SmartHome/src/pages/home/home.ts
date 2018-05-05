@@ -34,6 +34,9 @@ export class HomePage {
 
 	private topic1: string = "siot/DAT/0F3A-D8FE-7BC9-0B64-3296-A28C-E88D-199F/507fd9cd-102e-fed6-af60-25ef4741822e";
 	private topic2: string = "siot/DAT/0F3A-D8FE-7BC9-0B64-3296-A28C-E88D-199F/b972d0d2-13b0-86b0-5fb0-393b251d80fa";
+
+	private topicKnx: string = "siot/DAT/0F3A-D8FE-7BC9-0B64-3296-A28C-E88D-199F/efdf4c1e-ffd7-e253-77d0-d2bfd1d3877a";
+
 	private topic3: string = "lol";
 
     constructor(
@@ -45,14 +48,30 @@ export class HomePage {
         this.navCtrl = navCtrl;
 		this.getHouse();
 
-		this.mqttService.subscribeTo(this.topic1).subscribe((message) => {
+		this.mqttService.subscribeTo(this.topicKnx).subscribe((message) => {
 			this.message = message.payload.toString();
 
 			console.log(message);
 			console.log(JSON.stringify(message));
 
-	    });
-    }
+		});
+
+		//setInterval(() => { this.mqttService.publish(this.topicKnx, "{'knx_textual':'on','val':1}")}, 5000);
+		//setInterval(() => { this.mqttService.publish(this.topicKnx, "{'knx_textual':'off','val':0}")}, 1000);
+	}
+
+
+	public testPublish(value: boolean): void {
+
+		console.log(value);
+
+		if (value) {
+			this.mqttService.publish(this.topicKnx, "{'knx_textual':'on','val':1}");
+			return;
+		}
+
+		this.mqttService.publish(this.topicKnx, "{'knx_textual':'off','val':0}");
+	}
 
 	public publish(message: string): void {
 		this.mqttService.publish(this.topic1, message);
@@ -76,5 +95,9 @@ export class HomePage {
 
     public floorSelected(floor: Floor): void {
         this.navCtrl.push(FloorPage, {floor: floor});
-    }
+	}
+
+	private log(msg: string): void {
+		console.log(msg);
+	}
 }

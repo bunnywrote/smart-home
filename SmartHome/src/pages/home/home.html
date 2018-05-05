@@ -16,22 +16,30 @@
 
 <ion-content class="home" padding>
 
-	<!--<h2 class="center">Ionic 3</h2>
-
-	<div class="center">
-		<p class="ionic-logo"></p>
-	</div>-->
-	<h2>
+	<!--<h2>
 		<label>Message:</label>
 		<input [(ngModel)]="message" />
 		<button (click)="publish(message)">Hello SIOT</button>
-	</h2>
+	</h2>-->
 
 	<ion-card>
 		<ion-card-header>
-			<h1>
-				{{message}}
-			</h1>
+			<h2>
+				Devices:
+			</h2>
+		</ion-card-header>
+		<ion-list>
+			<div ion-item *ngFor="let deviceGroup of house?.deviceGroups">
+
+				<device-group [group]="deviceGroup"></device-group>
+
+			</div>
+		</ion-list>
+	</ion-card>
+	
+
+	<ion-card>
+		<ion-card-header>
 			Floors:
 		</ion-card-header>
 

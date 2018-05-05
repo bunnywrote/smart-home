@@ -18,6 +18,9 @@ import {
 import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
 import { FloorPage } from '../pages/floor/floor';
+import { OnOffSwitcherComponent } from '../components/on-off-switcher/on-off-switcher.component';
+
+//import { SharedModule } from '../components/shared.module';
 
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
 	hostname: 'siot.net',
@@ -38,23 +41,26 @@ export function mqttServiceFactory() {
     declarations: [
         MyApp,
         LoginPage,
-        FloorPage
-    ],
+		FloorPage,
+	//	OnOffSwitcherComponent
+	],
 	imports: [
+//		SharedModule,
 		MqttModule.forRoot({
 			provide: MqttService,
 			useFactory: mqttServiceFactory
 		}),
         BrowserModule,
-        IonicModule.forRoot(MyApp)],
+		IonicModule.forRoot(MyApp),
+	],
     bootstrap: [
         IonicApp
     ],
     entryComponents: [
         MyApp,
         LoginPage,
-        FloorPage
-    ],
+		FloorPage
+	],
 	providers: [
 		SiotMqttService,
         StatusBar,
