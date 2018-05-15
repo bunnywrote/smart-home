@@ -1,13 +1,13 @@
-﻿<!--<ion-grid>
+﻿<ion-grid>
 	<ion-row>
+		
 		<ion-col col-9>
-			<ion-label>{{label}}</ion-label>
+			<ion-label> {{device.name}} </ion-label>
 		</ion-col>
-		<ion-col col-3 (click)="toggle()">
-			<ion-toggle checked="{{checked}}"></ion-toggle>
+
+		<ion-col col-3 class="align-left" (click)="toggle()">
+			<ion-toggle checked="{{device.value}}"></ion-toggle>
 		</ion-col>
+
 	</ion-row>
-</ion-grid>-->
-<div (click)="toggle()">
-	<ion-toggle  checked="{{checked}}"></ion-toggle>	
-</div>
+</ion-grid>	
